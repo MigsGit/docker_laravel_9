@@ -8,7 +8,7 @@ services:
       - ./laravel-app:/var/www/html
     ports:
       - 9000:80
-  db:
+  mysql_db:
     image: mysql:latest
     environment:
       MYSQL_DATABASE: lamp_demo
@@ -16,19 +16,19 @@ services:
       MYSQL_PASSWORD: password
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     volumes:
-      - "./db:/docker-entrypoint-initdb.d"
+      - "./mysql_db:/docker-entrypoint-initdb.d"
     networks:
       - lamp-docker
   phpmyadmin:
     depends_on:
-      - db
+      - mysql_db
     image: phpmyadmin:latest
     ports:
       - 9001:80
     environment:
-      - PMA_HOST=db
+      - PMA_HOST=mysql_db
       - PMA_PORT=3306
-      - PMA_ARBITRARY=1
+      # - PMA_ARBITRARY=1
     networks:
       - lamp-docker
 networks:
