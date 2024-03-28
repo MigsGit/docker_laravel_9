@@ -6,6 +6,9 @@ ps:
 	docker-compose ps
 build:
 	docker-compose build --no-cache --force-rm
+fresh:
+	@make stop
+	@make up
 stop:
 	docker-compose stop
 up:

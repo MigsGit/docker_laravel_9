@@ -1,4 +1,9 @@
-FROM php:8.1.0-apache
+FROM php:8.3.4-apache
+
+# Where encountered an error with "RUN a2enmod rewrite"
+# FROM php:8.3.4 as php
+# FROM php:8.2.0 as php
+# FROM php:8.1.0 as php
 WORKDIR /var/www/html
 
 # Mod Rewrite
