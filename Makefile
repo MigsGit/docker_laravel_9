@@ -1,26 +1,28 @@
-setup:
+setup: #Run Setup from the sratch
 	@make build
 	@make up 
 	@make composer-update
-ps: 
+ps:  #Check docker containers
 	docker-compose ps
-build:
+build: #Run build force and no cache
 	docker-compose build --no-cache --force-rm
-fresh:
+fresh: #Refresh containers
 	@make stop
 	@make up
-stop:
+stop: #Stop containers
 	docker-compose stop
-up:
+up: #Run all containers
 	docker-compose up -d
-cache:
-    docker exec laravel-docker bash -c "php artisan config:cache"
-    docker exec laravel-docker bash -c "php artisan config:clear"
-    docker exec laravel-docker bash -c "php artisan cache:clear"
+
+# In laravel, the edit the container_name to run the script below.
+cache: #Laravel Clear Cache
+    docker exec container_name bash -c "php artisan config:cache" 
+    docker exec container_name bash -c "php artisan config:clear"
+    docker exec container_name bash -c "php artisan cache:clear"
     
-composer-update:
-	docker exec laravel-docker bash -c "composer update"
-data:
-	docker exec laravel-docker bash -c "php artisan migrate"
-	docker exec laravel-docker bash -c "php artisan db:seed"
+composer-update: #Laravel Composer update
+	docker exec laravel-vue bash -c "composer update"
+data: #Laravel Migration
+	docker exec container_name bash -c "php artisan migrate"
+	docker exec container_name bash -c "php artisan db:seed"
 
