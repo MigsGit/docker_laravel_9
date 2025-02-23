@@ -21,7 +21,7 @@ cache: #Laravel Clear Cache
     docker exec container_name bash -c "php artisan cache:clear"
     
 composer-update: #Laravel Composer update
-	docker exec laravel-vue bash -c "composer update"
+	docker exec laravel-app bash -c "composer update"
 data: #Laravel Migration
 	docker exec container_name bash -c "php artisan migrate"
 	docker exec container_name bash -c "php artisan db:seed"
